@@ -1,0 +1,3 @@
+[submodule "tools/SimpleCodeTester"]
+	path = tools/SimpleCodeTester
+	url = https://github.com/GWRon/SimpleCodeTester.git

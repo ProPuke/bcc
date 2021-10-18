@@ -1,8 +1,11 @@
 *.bak
-.bmx
 .bmx/
+/.test/
 /bcc
 /bcc.debug
 /bcc.exe
 /bcc.debug.exe
-
+/build
+/build.debug
+/build.exe
+/build.debug.exe
