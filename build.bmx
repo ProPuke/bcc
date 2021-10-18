@@ -110,6 +110,7 @@ Function RunProcess$(isExecutable:Int, executable$, arguments$[] = [])
 	If verbose Then Print "> "+commandline
 
 	Local output$
+	Local error$
 	Local bytes:Byte[]
 
 	Repeat
@@ -121,11 +122,20 @@ Function RunProcess$(isExecutable:Int, executable$, arguments$[] = [])
 			StandardIOStream.WriteString data
 			StandardIOStream.Flush
 		EndIf
+		bytes = process.err.ReadPipe()
+		If bytes
+			Local data$ = String.FromBytes(bytes, bytes.length)
+			error :+ data
+			StandardIOStream.WriteString data
+			StandardIOStream.Flush
+		EndIf
 	Until Not process.status()
 
 	process.Close()
 
-	If output Then Print
+	If output Or error Then Print
+
+	If error Then Return ""
 
 	Return output.Trim().Replace("~r","")
 End Function
